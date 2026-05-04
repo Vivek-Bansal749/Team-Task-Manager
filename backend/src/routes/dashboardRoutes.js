@@ -1,5 +1,5 @@
 import express from "express";
-import Task from "../models/Task.js";
+import Task from "../models/task.js";
 import authMiddleware from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
