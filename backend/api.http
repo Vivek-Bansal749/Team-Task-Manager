@@ -1,0 +1,158 @@
+### signup
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-Type:application/json
+
+{
+  "name": "Vivek",
+  "email": "vivek@test.com",
+  "password": "123456",
+  "role": "ADMIN"
+}
+
+### signup
+POST http://localhost:3000/auth/signup HTTP/1.1
+content-Type:application/json
+
+{
+  "name": "Vivek",
+  "email": "vivek@gmail.com",
+  "password": "123456",
+  "role": "MEMBER"
+}
+
+
+### login 
+POST http://localhost:3000/auth/login HTTP/1.1
+content-Type:application/json
+
+
+{
+    "email":"vivek@test.com",
+    "password":"123456"
+}
+
+
+### login 
+POST http://localhost:3000/auth/login HTTP/1.1
+content-Type:application/json
+
+
+{
+    "email":"vivek@gmail.com",
+    "password":"123456"
+}
+
+### Protected Route Test
+GET http://localhost:3000/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjZlMmIzOTMwYWVhMGRkNmRhNGU3NiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Nzc5NjA2OSwiZXhwIjoxNzc4NDAwODY5fQ.cZ6FMiRY4_AV51wkhsJpTSMrndAO1gz57nDVlrl09-k
+
+
+### Admin Only Route
+GET http://localhost:3000/auth/admin-only
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjZlMmIzOTMwYWVhMGRkNmRhNGU3NiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Nzc5NjA2OSwiZXhwIjoxNzc4NDAwODY5fQ.cZ6FMiRY4_AV51wkhsJpTSMrndAO1gz57nDVlrl09-k
+
+
+### Admin Only Route checking by member 
+
+GET http://localhost:3000/auth/admin-only
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjcwNzI1Y2ZjMTgyMTQ2Njk5NjQwMiIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE3Nzc3OTcwMzUsImV4cCI6MTc3ODQwMTgzNX0.RqVbVgfIHIRw5YObLKCeTWnPJ7p0BUvOQ0kpdxpFMF0
+
+
+### Create Project
+POST http://localhost:3000/auth/projects
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjZlMmIzOTMwYWVhMGRkNmRhNGU3NiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Nzc5NjA2OSwiZXhwIjoxNzc4NDAwODY5fQ.cZ6FMiRY4_AV51wkhsJpTSMrndAO1gz57nDVlrl09-k
+
+{
+  "name": "Team Task Manager",
+  "description": "Placement assignment project",
+  "status": "ACTIVE",
+  "priority": "HIGH",
+  "startDate": "2026-05-03",
+  "endDate": "2026-05-20",
+  "members": ["69f70725cfc1821466996402"]
+}
+
+### Creating project with member token
+POST http://localhost:3000/auth/projects
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjcwNzI1Y2ZjMTgyMTQ2Njk5NjQwMiIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE3Nzc3OTcwMzUsImV4cCI6MTc3ODQwMTgzNX0.RqVbVgfIHIRw5YObLKCeTWnPJ7p0BUvOQ0kpdxpFMF0
+
+{
+  "name": "Team Task Manager",
+  "description": "Placement assignment project",
+  "status": "ACTIVE",
+  "priority": "HIGH",
+  "startDate": "2026-05-03",
+  "endDate": "2026-05-20"
+}
+
+
+### Get All Projects (Admin)
+GET http://localhost:3000/auth/projects
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjZlMmIzOTMwYWVhMGRkNmRhNGU3NiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Nzc5NjA2OSwiZXhwIjoxNzc4NDAwODY5fQ.cZ6FMiRY4_AV51wkhsJpTSMrndAO1gz57nDVlrl09-k
+
+
+### Get All Projects (Member)
+GET http://localhost:3000/auth/projects
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjcwNzI1Y2ZjMTgyMTQ2Njk5NjQwMiIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE3Nzc3OTcwMzUsImV4cCI6MTc3ODQwMTgzNX0.RqVbVgfIHIRw5YObLKCeTWnPJ7p0BUvOQ0kpdxpFMF0
+
+
+### Add Member to Project (Admin Only)
+POST http://localhost:3000/auth/projects/69f70cee77b138ec64ab07ea/members
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjZlMmIzOTMwYWVhMGRkNmRhNGU3NiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Nzc5NjA2OSwiZXhwIjoxNzc4NDAwODY5fQ.cZ6FMiRY4_AV51wkhsJpTSMrndAO1gz57nDVlrl09-k
+
+
+{
+  "userId": "69f70725cfc1821466996402"
+}
+
+
+### Create Task (Admin Only)
+POST http://localhost:3000/auth/tasks
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjZlMmIzOTMwYWVhMGRkNmRhNGU3NiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Nzc5NjA2OSwiZXhwIjoxNzc4NDAwODY5fQ.cZ6FMiRY4_AV51wkhsJpTSMrndAO1gz57nDVlrl09-k
+
+
+{
+  "title": "Build Login API",
+  "description": "Create login endpoint with JWT",
+  "priority": "HIGH",
+  "dueDate": "2026-05-10",
+  "project": "69f70cee77b138ec64ab07ea",
+  "assignedTo": "69f70725cfc1821466996402"
+}
+
+
+### Get All Tasks (Admin)
+GET http://localhost:3000/auth/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjZlMmIzOTMwYWVhMGRkNmRhNGU3NiIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc3Nzc5NjA2OSwiZXhwIjoxNzc4NDAwODY5fQ.cZ6FMiRY4_AV51wkhsJpTSMrndAO1gz57nDVlrl09-k
+
+
+
+### Get Assigned Tasks to members
+GET http://localhost:3000/auth/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjcwNzI1Y2ZjMTgyMTQ2Njk5NjQwMiIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE3Nzc3OTcwMzUsImV4cCI6MTc3ODQwMTgzNX0.RqVbVgfIHIRw5YObLKCeTWnPJ7p0BUvOQ0kpdxpFMF0
+
+
+### Update Task Status (Member)
+PATCH http://localhost:3000/auth/tasks/69f71371e29252b8fb06ff00
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjcwNzI1Y2ZjMTgyMTQ2Njk5NjQwMiIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE3Nzc3OTcwMzUsImV4cCI6MTc3ODQwMTgzNX0.RqVbVgfIHIRw5YObLKCeTWnPJ7p0BUvOQ0kpdxpFMF0
+
+
+
+{
+  "status": "DONE"
+}
+
+
+### Admin Dashboard
+GET http://localhost:3000/auth/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjcwNzI1Y2ZjMTgyMTQ2Njk5NjQwMiIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE3Nzc3OTcwMzUsImV4cCI6MTc3ODQwMTgzNX0.RqVbVgfIHIRw5YObLKCeTWnPJ7p0BUvOQ0kpdxpFMF0
+
+
+### Member Dashboard
+GET http://localhost:3000/auth/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5ZjcwNzI1Y2ZjMTgyMTQ2Njk5NjQwMiIsInJvbGUiOiJNRU1CRVIiLCJpYXQiOjE3Nzc3OTcwMzUsImV4cCI6MTc3ODQwMTgzNX0.RqVbVgfIHIRw5YObLKCeTWnPJ7p0BUvOQ0kpdxpFMF0
