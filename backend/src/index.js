@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+
 import authRoutes from "./routes/authRoutes.js";
 import testRoute from "./routes/testroute.js";
 import adminRoutes from "./routes/adminRoutes.js";
@@ -14,7 +15,16 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://team-task-manager-frontend-production-6c7e.up.railway.app/",
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
 app.use("/auth", authRoutes);
@@ -23,8 +33,6 @@ app.use("/auth", adminRoutes);
 app.use("/auth", projectRoutes);
 app.use("/auth", taskRoutes);
 app.use("/auth", dashboardRoutes);
-
-
 
 app.get("/", (req, res) => {
   res.send("API is running...");
