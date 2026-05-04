@@ -18,7 +18,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:4175",
-      "https://team-task-manager-frontend-production-6c7e.up.railway.app/",
+      "https://team-task-manager-production-03e7.up.railway.app",
     ],
     credentials: true,
   })
